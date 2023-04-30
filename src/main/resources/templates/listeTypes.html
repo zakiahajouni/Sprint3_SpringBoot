@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+    <meta charset="utf-8">
+    <title>List of Types</title>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                List of types
+            </div>
+            <div class="card-body">
+
+                <table class="table table-striped">
+
+                    <tr>
+                        <th>ID</th><th>Name</th><th>Description</th>
+
+                    </tr>
+                    <tr th:each="t:${type.content}">
+                        <td th:text="${t.id}"></td>
+                        <td th:text="${t.nameType}"></td>
+                        <td th:text="${t.description}"></td>
+
+                        <td><a class="btn btn-primary" th:href="@{modifierType(id=${t.id})}">Edit</a></td>
+                        <td><a class="btn btn-danger"  onclick="return confirm('Are you sure ?')" th:href="@{supprimerType(id=${t.id},
+page=${currentPage},size=${size})}">Delete</a></td>
+
+                    </tr>
+                </table>
+                <ul class="nav nav-pills">
+                    <li th:each="page,status:${pages}">
+                        <a th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
+                           th:href="@{ ListeTypes(page=${status.index}, size=${size} ) }"
+                           th:text="${status.index }"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

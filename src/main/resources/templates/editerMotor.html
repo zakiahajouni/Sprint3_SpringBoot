@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+      href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<c:url value="/css/main.css" var="jstlCss" />
+<link href="${jstlCss}" rel="stylesheet" />
+<script type="text/javascript"
+        src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
+    <title>Modify Motor</title>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+    <div class="container mt-5">
+        <div class="card-body">
+            <form th:action="@{saveMotor}" method="post">
+                <div class="form-group">
+                    <label class="control-label" hidden>ID Motor :</label>
+                    <input type="hidden" name="idMotor" class="form-control"
+                           th:value="${motor.idMotor}" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Name :</label>
+                    <input type="text" name="nameMotor" class="form-control"
+                           th:value="${motor.nameMotor}" />
+                    <span th:errors= ${motor.nameMotor} class="text-danger">
+</span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Price :</label>
+                    <input type="text" name="priceMotor" class="form-control"
+                           th:value="${motor.priceMotor}" />
+                    <span th:errors=${motor.priceMotor} class="text-danger">
+</span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Date of creation :</label>
+                    <input type="date" name="dateCreation" class="form-control"
+                           th:value="${motor.dateCreation}"/>
+                    <span th:errors=${motor.dateCreation} class="text-danger">
+</span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Maximum speed :</label>
+                    <input type="text" name="priceMotor" class="form-control"
+                           th:value="${motor.maxSpeedMotor}" />
+                    <span th:errors=${motor.maxSpeedMotor} class="text-danger">
+</span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Color :</label>
+                    <input type="text" name="priceMotor" class="form-control"
+                           th:value="${motor.colorMotor}" />
+                    <span th:errors=${motor.colorMotor} class="text-danger">
+</span>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Validate</button>
+                </div>
+            </form>
+                </div>
+        <br/>
+        <br/>
+        <a href="ListeMotors">List of Motors</a>
+    </div>
+</div>
+</body>
+</html>

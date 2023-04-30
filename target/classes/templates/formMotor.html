@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Motor</title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header" th:if="${mode=='new'}"> Add Motor </div>
+            <div class="card-header" th:if="${mode=='edit'}">Update Motor
+            </div>
+        <div class="card-body">
+            <form th:action="@{saveMotor}" method="post">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="control-label" >page :</label>
+                        <input type="text" name="page" class="form-control"
+                               th:value="${page}" />
+                        <label class="control-label" hidden>ID Motor :</label>
+                        <input type="hidden" name="idMotor" class="form-control"
+                               th:value="${motor.idMotor}" />
+                    </div>
+
+                    <label class="control-label">Name :</label>
+                    <input type="text" name="nameMotor" class="form-control"
+                           th:value="${motor.nameMotor}" />
+                    <span th:errors= ${motor.nameMotor} class="text-danger"> </span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Price :</label>
+                    <input type="text" name="priceMotor" class="form-control"
+                           th:value="${motor.priceMotor}" />
+                    <span th:errors=${motor.priceMotor} class="text-danger"> </span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">date of creation :</label>
+                    <input type="date" name="dateCreation" class="form-control"
+                           th:value="${motor.dateCreation}"/>
+                    <span th:errors=${motor.dateCreation} class="text-danger"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Maximum Speed :</label>
+                    <input type="text" name="maxSpeedMotor" class="form-control"
+                           th:value="${motor.maxSpeedMotor}" />
+                    <span th:errors= ${motor.maxSpeedMotor} class="text-danger"> </span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Color :</label>
+                    <input type="text" name="colorMotor" class="form-control"
+                           th:value="${motor.colorMotor}" />
+                    <span th:errors= ${motor.colorMotor} class="text-danger"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <select class="form-control form-control-lg" id="type" name="type.id">
+                        <option value="">Select a type</option>
+                        <option th:each="type : ${types}"
+                                th:value="${type.id}"
+                                th:text="${type.nameType}"
+                                th:selected="${selectedType != null and type.id == selectedType.id}">
+                        </option>
+                    </select>
+                </div>
+
+
+                <div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+        <br/>
+        <br/>
+        <a href="ListeMotors">List Of Motors</a>
+    </div>
+</div>
+</div>
+</body>
+</html>

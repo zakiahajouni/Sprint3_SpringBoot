@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="template">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+    <meta charset="utf-8">
+    <title>List of motors</title>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+            List of motors
+        </div>
+        <div class="card-body">
+
+            <table class="table table-striped">
+
+                <tr>
+                    <th>ID</th><th>Name</th><th>Price</th><th>Maximum speed</th>
+                    <th>Color</th><th>type</th>
+                </tr>
+                <tr th:each="m:${motors.content}">
+                <td th:text="${m.idMotor}"></td>
+                    <td th:text="${m.nameMotor}"></td>
+                    <td th:text="${m.priceMotor}"></td>
+                    <td th:text="${m.maxSpeedMotor}"></td>
+                    <td th:text="${m.colorMotor}"></td>
+
+                    <td th:text="${m.type != null ? m.type.nameType : ''}"></td>
+
+                    <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-primary" th:href="@{modifierMotor(id=${m.idMotor},page = ${currentPage})}">Edit</a></td>
+                    <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger"  onclick="return confirm('Are you sure ?')" th:href="@{supprimerMotor(id=${m.idMotor},
+page=${currentPage},size=${size})}">Delete</a></td>
+
+                </tr>
+            </table>
+            <ul class="nav nav-pills">
+                <li th:each="page,status:${pages}">
+                    <a th:class="${status.index==currentPage?'btn btn-primary':'btn' }"
+                       th:href="@{ ListeMotors(page=${status.index}, size=${size} ) }"
+                       th:text="${status.index }"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
